@@ -1,0 +1,1462 @@
+{
+  "_meta": {
+    "title": "Starbucks data \u2014 v2, after gap-filling research",
+    "compiled": "2026-09-18",
+    "changes_from_v1": [
+      "RESOLVED: the store-count conflict. 38,038 is the FY2023 figure, not FY2025. The aggregator series that reported it as FY2025 is shifted by two years and should not be used.",
+      "ADDED: full segment P&L (revenue, all expense lines, operating income) for FY2023, FY2024, FY2025 \u2014 from the FY2025 10-K segments note.",
+      "ADDED: consolidated revenue mix by product type, three years.",
+      "ADDED: revenue by geography (US / China / other), three years.",
+      "ADDED: corrected primary store-count series 2015-2025.",
+      "ADDED: quarter-end store counts FY2024 Q2 through FY2026 Q1.",
+      "ADDED: quarterly comparable-store-sales figures for FY2024 and FY2025."
+    ],
+    "confidence_levels": {
+      "primary": "SEC filing or Starbucks investor relations. Ground truth.",
+      "secondary": "Reputable aggregator or press reporting of official figures.",
+      "dataset": "Third-party dataset. Schema confirmed, values not held.",
+      "incomplete": "Known partial. Not a continuous series."
+    },
+    "fiscal_year_note": "Fiscal year ends the Sunday closest to 30 September. FY2025 ended 28 Sep 2025. FY2023, FY2024 and FY2025 were all 52-week years."
+  },
+  "revenue_annual": {
+    "_confidence": "primary",
+    "_source": "10-K filings; cross-checked against bullfincher and macrotrends",
+    "_unit": "USD billions",
+    "series": [
+      {
+        "fy": 2015,
+        "revenue": 19.2
+      },
+      {
+        "fy": 2016,
+        "revenue": 21.3
+      },
+      {
+        "fy": 2017,
+        "revenue": 22.4
+      },
+      {
+        "fy": 2018,
+        "revenue": 24.7
+      },
+      {
+        "fy": 2019,
+        "revenue": 26.5
+      },
+      {
+        "fy": 2020,
+        "revenue": 23.5,
+        "note": "COVID"
+      },
+      {
+        "fy": 2021,
+        "revenue": 29.1
+      },
+      {
+        "fy": 2022,
+        "revenue": 32.3
+      },
+      {
+        "fy": 2023,
+        "revenue": 35.98
+      },
+      {
+        "fy": 2024,
+        "revenue": 36.18
+      },
+      {
+        "fy": 2025,
+        "revenue": 37.18
+      }
+    ]
+  },
+  "segment_pl": {
+    "_confidence": "primary",
+    "_source": "FY2025 Form 10-K, segments note (filed 14 Nov 2025)",
+    "_unit": "USD millions",
+    "_note": "Complete P&L by segment for three fiscal years. This is the single richest block in the file.",
+    "fiscal_2025": {
+      "north_america": {
+        "net_revenues": 27373.1,
+        "product_and_distribution_costs": 7628.7,
+        "store_operating_expenses": 13973.3,
+        "other_operating_expenses": 281.6,
+        "depreciation_amortization": 1196.3,
+        "general_administrative": 483.3,
+        "restructuring_impairments": 653.2,
+        "total_operating_expenses": 24216.4,
+        "equity_investees": 0,
+        "operating_income": 3156.7,
+        "operating_margin_pct": 11.5
+      },
+      "international": {
+        "net_revenues": 7819.9,
+        "product_and_distribution_costs": 2749.8,
+        "store_operating_expenses": 3085.6,
+        "other_operating_expenses": 242.0,
+        "depreciation_amortization": 363.9,
+        "general_administrative": 344.3,
+        "restructuring_impairments": 82.5,
+        "total_operating_expenses": 6868.1,
+        "equity_investees": -1.8,
+        "operating_income": 950.0,
+        "operating_margin_pct": 12.1
+      },
+      "channel_development": {
+        "net_revenues": 1871.7,
+        "product_and_distribution_costs": 1168.3,
+        "store_operating_expenses": 0,
+        "other_operating_expenses": 60.2,
+        "depreciation_amortization": 0,
+        "general_administrative": 5.8,
+        "restructuring_impairments": 1.9,
+        "total_operating_expenses": 1236.2,
+        "equity_investees": 249.6,
+        "operating_income": 885.1,
+        "operating_margin_pct": 47.3
+      },
+      "corporate_and_other": {
+        "net_revenues": 119.7,
+        "operating_income": -2055.2
+      },
+      "total": {
+        "net_revenues": 37184.4,
+        "operating_income": 2936.6,
+        "operating_margin_pct": 7.9,
+        "interest_income_other": 113.3,
+        "interest_expense": -542.6,
+        "earnings_before_taxes": 2507.3
+      }
+    },
+    "fiscal_2024": {
+      "north_america": {
+        "net_revenues": 27009.5,
+        "product_and_distribution_costs": 7478.0,
+        "store_operating_expenses": 12467.1,
+        "other_operating_expenses": 280.9,
+        "depreciation_amortization": 1052.4,
+        "general_administrative": 375.8,
+        "total_operating_expenses": 21654.2,
+        "equity_investees": 0,
+        "operating_income": 5355.3,
+        "operating_margin_pct": 19.8
+      },
+      "international": {
+        "net_revenues": 7338.9,
+        "product_and_distribution_costs": 2575.2,
+        "store_operating_expenses": 2819.4,
+        "other_operating_expenses": 225.1,
+        "depreciation_amortization": 338.3,
+        "general_administrative": 338.8,
+        "total_operating_expenses": 6296.8,
+        "equity_investees": 3.6,
+        "operating_income": 1045.7,
+        "operating_margin_pct": 14.2
+      },
+      "channel_development": {
+        "net_revenues": 1769.8,
+        "product_and_distribution_costs": 1075.4,
+        "other_operating_expenses": 58.4,
+        "general_administrative": 7.7,
+        "total_operating_expenses": 1141.5,
+        "equity_investees": 297.6,
+        "operating_income": 925.9,
+        "operating_margin_pct": 52.3
+      },
+      "corporate_and_other": {
+        "net_revenues": 58.0,
+        "operating_income": -1918.1
+      },
+      "total": {
+        "net_revenues": 36176.2,
+        "operating_income": 5408.8,
+        "operating_margin_pct": 15.0,
+        "interest_income_other": 122.8,
+        "interest_expense": -562.0,
+        "earnings_before_taxes": 4969.6
+      }
+    },
+    "fiscal_2023": {
+      "north_america": {
+        "net_revenues": 26569.6,
+        "product_and_distribution_costs": 7530.4,
+        "store_operating_expenses": 11959.2,
+        "other_operating_expenses": 263.8,
+        "depreciation_amortization": 910.1,
+        "general_administrative": 389.7,
+        "restructuring_impairments": 20.7,
+        "total_operating_expenses": 21073.9,
+        "equity_investees": 0,
+        "operating_income": 5495.7,
+        "operating_margin_pct": 20.7
+      },
+      "international": {
+        "net_revenues": 7487.6,
+        "product_and_distribution_costs": 2608.4,
+        "store_operating_expenses": 2761.1,
+        "other_operating_expenses": 219.0,
+        "depreciation_amortization": 335.1,
+        "general_administrative": 335.8,
+        "total_operating_expenses": 6259.4,
+        "equity_investees": 2.7,
+        "operating_income": 1230.9,
+        "operating_margin_pct": 16.4
+      },
+      "channel_development": {
+        "net_revenues": 1893.8,
+        "product_and_distribution_costs": 1250.1,
+        "other_operating_expenses": 54.6,
+        "depreciation_amortization": 0.1,
+        "general_administrative": 8.4,
+        "total_operating_expenses": 1313.2,
+        "equity_investees": 295.7,
+        "other_segment_items": 91.3,
+        "operating_income": 967.6,
+        "operating_margin_pct": 51.1
+      },
+      "corporate_and_other": {
+        "net_revenues": 24.6,
+        "operating_income": -1823.4
+      },
+      "total": {
+        "net_revenues": 35975.6,
+        "operating_income": 5870.8,
+        "operating_margin_pct": 16.3,
+        "interest_income_other": 81.2,
+        "interest_expense": -550.1,
+        "earnings_before_taxes": 5401.9
+      }
+    },
+    "_headline_finding": "Consolidated operating margin fell from 16.3% (FY2023) to 15.0% (FY2024) to 7.9% (FY2025). North America's segment margin nearly halved, 20.7% to 11.5%, driven by store operating expenses rising $1.5B and $653M of restructuring charges."
+  },
+  "revenue_by_product_type": {
+    "_confidence": "primary",
+    "_source": "FY2025 10-K",
+    "_unit": "USD millions",
+    "series": [
+      {
+        "fy": 2025,
+        "beverage": 22539.9,
+        "beverage_pct": 61,
+        "food": 7049.9,
+        "food_pct": 19,
+        "other": 7594.6,
+        "other_pct": 20,
+        "total": 37184.4
+      },
+      {
+        "fy": 2024,
+        "beverage": 21883.9,
+        "beverage_pct": 60,
+        "food": 6749.2,
+        "food_pct": 19,
+        "other": 7543.1,
+        "other_pct": 21,
+        "total": 36176.2
+      },
+      {
+        "fy": 2023,
+        "beverage": 21684.8,
+        "beverage_pct": 60,
+        "food": 6585.1,
+        "food_pct": 18,
+        "other": 7705.7,
+        "other_pct": 22,
+        "total": 35975.6
+      }
+    ],
+    "_definitions": {
+      "beverage": "Sales within company-operated stores",
+      "food": "Sales within company-operated stores",
+      "other": "Packaged and single-serve coffees and teas, royalty and licensing revenue, beverage ingredients, serveware"
+    }
+  },
+  "revenue_by_geography": {
+    "_confidence": "primary",
+    "_source": "FY2025 10-K",
+    "_unit": "USD millions",
+    "_note": "Based on customer location. Includes Channel Development and other revenues.",
+    "series": [
+      {
+        "fy": 2025,
+        "united_states": 27124.7,
+        "china": 3160.8,
+        "other_countries": 6898.9,
+        "total": 37184.4
+      },
+      {
+        "fy": 2024,
+        "united_states": 26707.4,
+        "china": 3008.2,
+        "other_countries": 6460.6,
+        "total": 36176.2
+      },
+      {
+        "fy": 2023,
+        "united_states": 26398.3,
+        "china": 3081.5,
+        "other_countries": 6495.8,
+        "total": 35975.6
+      }
+    ],
+    "other_countries_composition": "Japan, Canada and the UK together are ~73% (FY2025), 72% (FY2024), 71% (FY2023) of the 'other countries' figure.",
+    "long_lived_assets": [
+      {
+        "fy": 2025,
+        "united_states": 15952.7,
+        "china": 4276.8,
+        "other_countries": 4407.9,
+        "total": 24637.4
+      },
+      {
+        "fy": 2024,
+        "united_states": 15878.4,
+        "china": 4514.2,
+        "other_countries": 4099.3,
+        "total": 24491.9
+      }
+    ]
+  },
+  "store_counts": {
+    "_confidence": "primary",
+    "_conflict_resolved": "v1 flagged 40,990 vs 38,038 as a conflict for FY2025. It is not a conflict: 38,038 is the FY2023 year-end total (17,810 North America + 20,228 International, per the FY2023 10-K). An aggregator series wrongly labelled it FY2025 and is shifted by two years. Discard that series.",
+    "annual_series": [
+      {
+        "fy": 2012,
+        "total": 18066,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2013,
+        "total": 19767,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2014,
+        "total": 21366,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2015,
+        "total": 23043,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2016,
+        "total": 25085,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2017,
+        "total": 27339,
+        "confidence": "secondary",
+        "note": "10-K confirms 13,275 company-operated + 14,064 licensed = 27,339"
+      },
+      {
+        "fy": 2018,
+        "total": 29324,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2019,
+        "total": 31256,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2020,
+        "total": 32660,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2021,
+        "total": 33833,
+        "confidence": "secondary"
+      },
+      {
+        "fy": 2022,
+        "total": 35711,
+        "company_operated": 18253,
+        "licensed": 17458,
+        "confidence": "primary",
+        "note": "Derived from FY2023 10-K opening balances"
+      },
+      {
+        "fy": 2023,
+        "total": 38038,
+        "company_operated": 19592,
+        "licensed": 18446,
+        "confidence": "primary"
+      },
+      {
+        "fy": 2024,
+        "total": 40199,
+        "confidence": "primary",
+        "note": "Q4 FY2024 earnings release"
+      },
+      {
+        "fy": 2025,
+        "total": 40990,
+        "company_operated": 21514,
+        "licensed": 19476,
+        "confidence": "primary"
+      }
+    ],
+    "quarter_end_series": [
+      {
+        "period": "FY2024 Q2",
+        "ended": "2024-03-31",
+        "total": 38951,
+        "net_opened": 364
+      },
+      {
+        "period": "FY2024 Q3",
+        "ended": "2024-06-30",
+        "total": 39477,
+        "net_opened": 526
+      },
+      {
+        "period": "FY2024 Q4",
+        "ended": "2024-09-29",
+        "total": 40199,
+        "net_opened": 722
+      },
+      {
+        "period": "FY2025 Q1",
+        "ended": "2024-12-29",
+        "total": 40576,
+        "net_opened": 377
+      },
+      {
+        "period": "FY2025 Q4",
+        "ended": "2025-09-28",
+        "total": 40990
+      }
+    ],
+    "fy2025_by_segment": {
+      "north_america": {
+        "company_operated": 11018,
+        "licensed": 7293,
+        "total": 18311,
+        "company_operated_pct": 60
+      },
+      "international": {
+        "company_operated": 10496,
+        "licensed": 12183,
+        "total": 22679,
+        "company_operated_pct": 46
+      },
+      "total": {
+        "company_operated": 21514,
+        "licensed": 19476,
+        "total": 40990,
+        "company_operated_pct": 52
+      },
+      "markets": 89
+    },
+    "fy2023_by_segment": {
+      "north_america": {
+        "company_operated": 10628,
+        "licensed": 7182,
+        "total": 17810,
+        "company_operated_pct": 60
+      },
+      "international": {
+        "company_operated": 8964,
+        "licensed": 11264,
+        "total": 20228,
+        "company_operated_pct": 44
+      },
+      "total": {
+        "company_operated": 19592,
+        "licensed": 18446,
+        "total": 38038,
+        "company_operated_pct": 52
+      }
+    },
+    "fy2025_company_operated_detail": [
+      {
+        "market": "U.S.",
+        "open_start": 10158,
+        "opened": 509,
+        "closed": -620,
+        "transfers": 0,
+        "net": -111,
+        "open_end": 10047
+      },
+      {
+        "market": "Canada",
+        "open_start": 997,
+        "opened": 45,
+        "closed": -75,
+        "transfers": 0,
+        "net": -30,
+        "open_end": 967
+      },
+      {
+        "market": "Siren Retail (NA)",
+        "open_start": 6,
+        "opened": 0,
+        "closed": -2,
+        "transfers": 0,
+        "net": -2,
+        "open_end": 4
+      },
+      {
+        "market": "Total North America",
+        "open_start": 11161,
+        "opened": 554,
+        "closed": -697,
+        "transfers": 0,
+        "net": -143,
+        "open_end": 11018
+      },
+      {
+        "market": "China",
+        "open_start": 7594,
+        "opened": 569,
+        "closed": -154,
+        "transfers": 0,
+        "net": 415,
+        "open_end": 8009
+      },
+      {
+        "market": "Japan",
+        "open_start": 1809,
+        "opened": 87,
+        "closed": -12,
+        "transfers": -1,
+        "net": 74,
+        "open_end": 1883
+      },
+      {
+        "market": "U.K.",
+        "open_start": 378,
+        "opened": 44,
+        "closed": -11,
+        "transfers": 113,
+        "net": 146,
+        "open_end": 524
+      },
+      {
+        "market": "All Other (Intl)",
+        "open_start": 71,
+        "opened": 7,
+        "closed": -3,
+        "transfers": 0,
+        "net": 4,
+        "open_end": 75
+      },
+      {
+        "market": "Siren Retail (Intl)",
+        "open_start": 5,
+        "opened": 0,
+        "closed": 0,
+        "transfers": 0,
+        "net": 0,
+        "open_end": 5
+      },
+      {
+        "market": "Total International",
+        "open_start": 9857,
+        "opened": 707,
+        "closed": -180,
+        "transfers": 112,
+        "net": 639,
+        "open_end": 10496
+      },
+      {
+        "market": "Total company-operated",
+        "open_start": 21018,
+        "opened": 1261,
+        "closed": -877,
+        "transfers": 112,
+        "net": 496,
+        "open_end": 21514
+      }
+    ],
+    "restructuring_note": "627 stores closed in Q4 FY2025 under the 'Back to Starbucks' plan; 584 in North America. 113 UK licensed stores converted to company-operated in Q1 FY2025 after the 23.5 Degrees Topco acquisition."
+  },
+  "comparable_store_sales": {
+    "_confidence": "primary",
+    "_source": "Quarterly earnings releases",
+    "_unit": "percent change year over year",
+    "series": [
+      {
+        "period": "FY2024 Q2",
+        "international": -6,
+        "china": -11
+      },
+      {
+        "period": "FY2024 Q3",
+        "international": -7,
+        "china": -14
+      },
+      {
+        "period": "FY2024 Q4",
+        "international": -9,
+        "china": -14
+      },
+      {
+        "period": "FY2025 Q1",
+        "global": -4,
+        "north_america": -4,
+        "international": -4,
+        "china": -6,
+        "global_transactions": -6,
+        "global_ticket": 3
+      },
+      {
+        "period": "FY2025 Q3",
+        "north_america": -2,
+        "na_transactions": -3,
+        "na_ticket": 1
+      },
+      {
+        "period": "FY2025 Q4",
+        "global": 0,
+        "note": "First global comp growth in seven quarters; US flat, September turned positive"
+      },
+      {
+        "period": "FY2026 Q1",
+        "global": 4,
+        "us": 4,
+        "international": 5
+      }
+    ],
+    "annual_context": [
+      {
+        "fy": 2022,
+        "north_america": 12
+      },
+      {
+        "fy": 2023,
+        "north_america": 9,
+        "na_ticket": 6
+      }
+    ]
+  },
+  "loyalty_program": {
+    "_confidence": "mixed",
+    "_definition": "90-day active Starbucks Rewards members, United States only.",
+    "series": [
+      {
+        "period": "FY2020 Q1",
+        "members_millions": 18.9,
+        "yoy_pct": 16,
+        "confidence": "secondary"
+      },
+      {
+        "period": "~2022",
+        "members_millions": 22.9,
+        "yoy_pct": 18,
+        "confidence": "secondary",
+        "warning": "Exact quarter unconfirmed. Verify or drop."
+      },
+      {
+        "period": "FY2024 Q1",
+        "members_millions": 34.3,
+        "confidence": "secondary"
+      },
+      {
+        "period": "FY2024 Q4",
+        "members_millions": 33.8,
+        "yoy_pct": 4,
+        "confidence": "primary"
+      },
+      {
+        "period": "FY2025 Q1",
+        "members_millions": 34.6,
+        "yoy_pct": 1,
+        "confidence": "primary"
+      },
+      {
+        "period": "FY2025 Q2",
+        "members_millions": 34.2,
+        "confidence": "secondary"
+      },
+      {
+        "period": "FY2025 Q3",
+        "members_millions": 33.9,
+        "confidence": "secondary"
+      },
+      {
+        "period": "FY2025 Q4",
+        "members_millions": 34.2,
+        "confidence": "secondary"
+      },
+      {
+        "period": "FY2026 Q1",
+        "members_millions": 35.5,
+        "confidence": "primary",
+        "note": "All-time high"
+      }
+    ],
+    "economics": {
+      "share_of_us_company_operated_revenue_pct": 60,
+      "annual_member_spend_busd": 13,
+      "mobile_order_transaction_share_pct": 31,
+      "us_gift_card_loads_q1_fy2025_busd": 3.5,
+      "us_gift_card_rank": 2
+    },
+    "program_change_2026": {
+      "launch": "2026-03-10",
+      "tiers": [
+        "Green",
+        "Gold",
+        "Reserve"
+      ]
+    }
+  },
+  "workforce": {
+    "headcount": {
+      "_confidence": "primary",
+      "_source": "Fiscal-year filings",
+      "series": [
+        {
+          "fy_end": "2020-09-27",
+          "employees": 349000,
+          "change": 3000,
+          "growth_pct": 0.87
+        },
+        {
+          "fy_end": "2021-10-03",
+          "employees": 383000,
+          "change": 34000,
+          "growth_pct": 9.74
+        },
+        {
+          "fy_end": "2022-10-02",
+          "employees": 402000,
+          "change": 19000,
+          "growth_pct": 4.96
+        },
+        {
+          "fy_end": "2023-10-01",
+          "employees": 381000,
+          "change": -21000,
+          "growth_pct": -5.22
+        },
+        {
+          "fy_end": "2024-09-29",
+          "employees": 361000,
+          "change": -20000,
+          "growth_pct": -5.25
+        },
+        {
+          "fy_end": "2025-09-28",
+          "employees": 381000,
+          "change": 20000,
+          "growth_pct": 5.54
+        }
+      ]
+    },
+    "third_party_headcount": {
+      "_confidence": "secondary",
+      "_warning": "Different methodology and date basis. Do not merge with the series above.",
+      "as_of": "2026-03",
+      "employees": 367848,
+      "yoy_change_pct": -5.5,
+      "geographic_pct": {
+        "north_america": 61.5,
+        "east_asia": 7.2,
+        "northern_europe": 6.0
+      },
+      "active_job_postings_2026": 36450
+    },
+    "diversity_2020": {
+      "_confidence": "secondary",
+      "_warning": "2020 data, six years old. Starbucks publishes EEO-1 reports 2016-2024 directly \u2014 use those instead.",
+      "pct_white_by_role": [
+        {
+          "role": "Baristas",
+          "pct_white": 51.4
+        },
+        {
+          "role": "Regional directors",
+          "pct_white": 73.0
+        },
+        {
+          "role": "Regional vice presidents",
+          "pct_white": 76.5
+        }
+      ]
+    }
+  },
+  "eps": {
+    "_confidence": "primary",
+    "_source": "Earnings releases and analyst consensus",
+    "quarterly": [
+      {
+        "period": "FY2025 Q4",
+        "reported": "2025-10-29",
+        "actual": 0.52,
+        "consensus": 0.59
+      },
+      {
+        "period": "FY2026 Q1",
+        "reported": "2026-01-28",
+        "actual": 0.56,
+        "consensus": 0.61
+      },
+      {
+        "period": "FY2026 Q2",
+        "reported": "2026-04-28",
+        "actual": 0.5,
+        "consensus": 0.41
+      },
+      {
+        "period": "FY2026 Q3",
+        "reported": "2026-07-29",
+        "actual": 0.85,
+        "consensus": 0.66
+      },
+      {
+        "period": "FY2026 Q4",
+        "reported": "2026-10-29",
+        "actual": null,
+        "consensus": 0.69
+      }
+    ],
+    "annual_diluted": [
+      {
+        "fy": 2021,
+        "eps": 3.566
+      },
+      {
+        "fy": 2022,
+        "eps": 2.845
+      },
+      {
+        "fy": 2023,
+        "eps": 3.597
+      },
+      {
+        "fy": 2024,
+        "eps": 3.307
+      }
+    ],
+    "net_income_musd": [
+      {
+        "fy": 2021,
+        "net_income": 4199.3
+      },
+      {
+        "fy": 2022,
+        "net_income": 3281.6
+      },
+      {
+        "fy": 2023,
+        "net_income": 4124.5
+      },
+      {
+        "fy": 2024,
+        "net_income": 3760.9
+      },
+      {
+        "fy": 2025,
+        "net_income": 1856.4
+      }
+    ]
+  },
+  "sustainability": {
+    "_confidence": "primary",
+    "_source": "FY2025 Global Impact Report; ESG Today (Jul 2026)",
+    "_baseline": "FY2019",
+    "emissions_change_pct": {
+      "scope_1_and_2_market_based": -17,
+      "scope_3": 8,
+      "total_footprint": 7,
+      "intensity": -3
+    },
+    "scope_3_share_of_total_pct": 90,
+    "target_2030_pct": 50,
+    "target_status": "Starbucks stated it is 'actively reassessing' the 2030 value-chain emissions target.",
+    "_gap": "No absolute tonnage and no year-by-year series. Would need the report data tables or CDP filings."
+  },
+  "customer_sentiment": {
+    "_confidence": "dataset",
+    "_source": "Kaggle: harshalhonde/starbucks-reviews-dataset (scraped from ConsumerAffairs)",
+    "_warning": "Reviews span Apr 2010 to Sep 2017. Average rating 1.87/5 \u2014 a complaints-site sample, not representative. Multiple public notebooks already analyse this exact file.",
+    "scale": {
+      "unique_locations": 633,
+      "approx_reviews": 700,
+      "avg_rating": 1.87
+    },
+    "published_sentiment_pct": {
+      "positive": 52.0,
+      "negative": 40.94,
+      "neutral": 7.06
+    }
+  },
+  "sources": {
+    "fy2025_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922425000114/sbux-20250928.htm",
+    "fy2024_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922424000057/sbux-20240929.htm",
+    "fy2023_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922423000058/sbux-20231001.htm",
+    "fy2022_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922422000058/sbux-20221002.htm",
+    "fy2021_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922421000086/sbux-20211003.htm",
+    "fy2020_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922420000078/sbux-20200927.htm",
+    "fy2017_10k": "https://www.sec.gov/Archives/edgar/data/829224/000082922417000049/sbux-1012017x10xk.htm",
+    "fy2026_q1_10q": "https://www.sec.gov/Archives/edgar/data/829224/000082922426000011/sbux-20251228.htm",
+    "segments_disclosure_all_years": "https://app.edgar.tools/companies/SBUX/disclosures/segments",
+    "investor_relations": "https://investor.starbucks.com/news/financial-releases/",
+    "impact_report": "https://about.starbucks.com/annual-impact-report/"
+  },
+  "menu_nutrition_real": {
+    "_confidence": "primary",
+    "_source": "Kaggle datasets, downloaded by user (starbucks_drinkMenu_expanded.csv, starbucks-menu-nutrition-food.csv)",
+    "drinks": {
+      "total_records": 242,
+      "unique_beverages": 33,
+      "categories": 9,
+      "avg_by_category": [
+        {
+          "category": "Classic Espresso Drinks",
+          "avg_calories": 140.2,
+          "avg_sugar_g": 17.0,
+          "avg_caffeine_mg": 122.1
+        },
+        {
+          "category": "Coffee",
+          "avg_calories": 4.2,
+          "avg_sugar_g": 0.0,
+          "avg_caffeine_mg": 293.8
+        },
+        {
+          "category": "Frappuccino\u00ae Blended Coffee",
+          "avg_calories": 276.9,
+          "avg_sugar_g": 57.1,
+          "avg_caffeine_mg": 101.8
+        },
+        {
+          "category": "Frappuccino\u00ae Blended Cr\u00e8me",
+          "avg_calories": 233.1,
+          "avg_sugar_g": 48.5,
+          "avg_caffeine_mg": 0.0
+        },
+        {
+          "category": "Frappuccino\u00ae Light Blended Coffee",
+          "avg_calories": 162.5,
+          "avg_sugar_g": 32.4,
+          "avg_caffeine_mg": 99.6
+        },
+        {
+          "category": "Shaken Iced Beverages",
+          "avg_calories": 114.4,
+          "avg_sugar_g": 26.0,
+          "avg_caffeine_mg": 139.6
+        },
+        {
+          "category": "Signature Espresso Drinks",
+          "avg_calories": 250.0,
+          "avg_sugar_g": 38.6,
+          "avg_caffeine_mg": 73.9
+        },
+        {
+          "category": "Smoothies",
+          "avg_calories": 282.2,
+          "avg_sugar_g": 36.8,
+          "avg_caffeine_mg": 5.6
+        },
+        {
+          "category": "Tazo\u00ae Tea Drinks",
+          "avg_calories": 177.3,
+          "avg_sugar_g": 30.3,
+          "avg_caffeine_mg": 50.4
+        }
+      ],
+      "top_sugar": [
+        [
+          "Java Chip (Venti Nonfat Milk)",
+          84
+        ],
+        [
+          "Java Chip (Whole Milk)",
+          84
+        ],
+        [
+          "Caramel Apple Spice (Venti)",
+          83
+        ]
+      ],
+      "top_caffeine": [
+        [
+          "Brewed Coffee (Venti)",
+          410
+        ],
+        [
+          "Brewed Coffee (Grande)",
+          330
+        ],
+        [
+          "Caff\u00e8 Americano (Venti)",
+          300
+        ]
+      ]
+    },
+    "food": {
+      "total_records": 113,
+      "avg_calories": 356.6,
+      "avg_fat_g": 16.4,
+      "avg_carbs_g": 41.5,
+      "avg_protein_g": 11.5,
+      "highest_calorie_item": "Lentils & Vegetable Protein Bowl with Brown Rice (650 cal)"
+    }
+  },
+  "store_locations_real": {
+    "_confidence": "secondary",
+    "_vintage": "2021 snapshot",
+    "_source": "Kaggle kukuroo3/starbucks-locations-worldwide-2021-version, downloaded by user",
+    "total_records": 28289,
+    "countries": 49,
+    "top_countries": [
+      [
+        "US",
+        15003
+      ],
+      [
+        "China",
+        2665
+      ],
+      [
+        "Japan",
+        1665
+      ],
+      [
+        "S. Korea",
+        1493
+      ],
+      [
+        "Canada",
+        1219
+      ],
+      [
+        "UK",
+        975
+      ],
+      [
+        "Mexico",
+        612
+      ],
+      [
+        "Taiwan",
+        507
+      ],
+      [
+        "Turkey",
+        474
+      ],
+      [
+        "Indonesia",
+        422
+      ]
+    ],
+    "ownership_split_pct": {
+      "company_operated": 49.99,
+      "licensed": 42.79,
+      "joint_venture": 6.05,
+      "franchise": 1.17
+    },
+    "top_us_states": [
+      [
+        "California",
+        2987
+      ],
+      [
+        "Texas",
+        1215
+      ],
+      [
+        "Florida",
+        801
+      ],
+      [
+        "Washington",
+        742
+      ],
+      [
+        "New York",
+        648
+      ]
+    ]
+  },
+  "stock_price_real": {
+    "_confidence": "primary",
+    "_source": "stockanalysis.com quarterly historical data, pasted by user",
+    "_unit": "USD, quarterly OHLC + volume",
+    "period": "Q4 2016 - Q3 2026",
+    "quarters": 40,
+    "columns": [
+      "quarter",
+      "open",
+      "high",
+      "low",
+      "close",
+      "change_pct",
+      "volume"
+    ],
+    "series": [
+      [
+        "Q4 2016",
+        54.1,
+        59.54,
+        50.84,
+        55.52,
+        3.02,
+        551446447
+      ],
+      [
+        "Q1 2017",
+        55.91,
+        59.0,
+        53.81,
+        58.39,
+        5.64,
+        610468300
+      ],
+      [
+        "Q2 2017",
+        58.28,
+        64.87,
+        57.38,
+        58.31,
+        0.27,
+        512282911
+      ],
+      [
+        "Q3 2017",
+        58.9,
+        59.66,
+        52.58,
+        53.71,
+        -7.47,
+        641284956
+      ],
+      [
+        "Q4 2017",
+        53.86,
+        60.05,
+        53.66,
+        57.43,
+        7.49,
+        569299356
+      ],
+      [
+        "Q1 2018",
+        57.95,
+        61.94,
+        53.56,
+        57.89,
+        1.35,
+        667081703
+      ],
+      [
+        "Q2 2018",
+        57.52,
+        60.18,
+        47.37,
+        48.85,
+        -15.17,
+        667650978
+      ],
+      [
+        "Q3 2018",
+        48.64,
+        57.84,
+        48.4,
+        56.84,
+        17.17,
+        620536580
+      ],
+      [
+        "Q4 2018",
+        56.91,
+        68.98,
+        54.71,
+        64.4,
+        13.91,
+        863166464
+      ],
+      [
+        "Q1 2019",
+        63.68,
+        74.48,
+        61.4,
+        74.34,
+        16.04,
+        684748138
+      ],
+      [
+        "Q2 2019",
+        74.76,
+        85.2,
+        73.73,
+        83.83,
+        13.29,
+        478633164
+      ],
+      [
+        "Q3 2019",
+        84.62,
+        99.72,
+        84.03,
+        88.42,
+        5.88,
+        444755850
+      ],
+      [
+        "Q4 2019",
+        88.63,
+        89.3,
+        81.03,
+        87.92,
+        -0.07,
+        410774066
+      ],
+      [
+        "Q1 2020",
+        88.12,
+        94.13,
+        50.02,
+        65.74,
+        -24.88,
+        783069948
+      ],
+      [
+        "Q2 2020",
+        63.0,
+        83.62,
+        60.9,
+        73.59,
+        12.57,
+        743082252
+      ],
+      [
+        "Q3 2020",
+        74.0,
+        89.43,
+        71.82,
+        85.92,
+        17.39,
+        502744709
+      ],
+      [
+        "Q4 2020",
+        87.04,
+        107.14,
+        85.09,
+        106.98,
+        25.1,
+        409041067
+      ],
+      [
+        "Q1 2021",
+        107.66,
+        112.34,
+        95.92,
+        109.27,
+        2.58,
+        402527832
+      ],
+      [
+        "Q2 2021",
+        110.06,
+        118.98,
+        108.2,
+        111.81,
+        2.73,
+        347209119
+      ],
+      [
+        "Q3 2021",
+        111.95,
+        126.32,
+        110.31,
+        110.31,
+        -0.96,
+        354445435
+      ],
+      [
+        "Q4 2021",
+        110.89,
+        117.48,
+        104.02,
+        116.97,
+        6.49,
+        431976560
+      ],
+      [
+        "Q1 2022",
+        116.47,
+        117.8,
+        78.92,
+        90.97,
+        -21.83,
+        630723544
+      ],
+      [
+        "Q2 2022",
+        91.5,
+        91.89,
+        68.39,
+        76.39,
+        -15.44,
+        668423294
+      ],
+      [
+        "Q3 2022",
+        76.73,
+        93.48,
+        75.73,
+        84.26,
+        10.93,
+        451577999
+      ],
+      [
+        "Q4 2022",
+        84.75,
+        105.54,
+        82.43,
+        99.2,
+        18.41,
+        451072799
+      ],
+      [
+        "Q1 2023",
+        100.56,
+        110.83,
+        97.19,
+        104.13,
+        5.5,
+        383639067
+      ],
+      [
+        "Q2 2023",
+        104.06,
+        115.48,
+        96.52,
+        99.06,
+        -4.4,
+        404987069
+      ],
+      [
+        "Q3 2023",
+        98.73,
+        104.46,
+        90.21,
+        91.27,
+        -7.37,
+        371567832
+      ],
+      [
+        "Q4 2023",
+        91.05,
+        107.66,
+        89.21,
+        96.01,
+        5.77,
+        480223740
+      ],
+      [
+        "Q1 2024",
+        95.45,
+        98.36,
+        90.06,
+        91.39,
+        -4.24,
+        523799633
+      ],
+      [
+        "Q2 2024",
+        91.82,
+        92.07,
+        71.8,
+        77.85,
+        -14.17,
+        771812104
+      ],
+      [
+        "Q3 2024",
+        77.99,
+        99.51,
+        71.55,
+        97.49,
+        25.98,
+        924881330
+      ],
+      [
+        "Q4 2024",
+        97.49,
+        103.32,
+        86.3,
+        91.25,
+        -5.82,
+        501641816
+      ],
+      [
+        "Q1 2025",
+        91.55,
+        117.46,
+        91.38,
+        98.09,
+        8.08,
+        593203490
+      ],
+      [
+        "Q2 2025",
+        97.85,
+        99.75,
+        75.5,
+        91.63,
+        -5.93,
+        712909172
+      ],
+      [
+        "Q3 2025",
+        91.54,
+        98.89,
+        81.2,
+        84.6,
+        -7.06,
+        601808737
+      ],
+      [
+        "Q4 2025",
+        84.46,
+        90.58,
+        77.99,
+        84.21,
+        0.26,
+        620080250
+      ],
+      [
+        "Q1 2026",
+        84.22,
+        104.82,
+        83.02,
+        89.59,
+        7.07,
+        573366253
+      ],
+      [
+        "Q2 2026",
+        90.25,
+        108.88,
+        88.16,
+        102.19,
+        14.73,
+        473804101
+      ],
+      [
+        "Q3 2026",
+        102.44,
+        110.51,
+        96.04,
+        96.67,
+        -4.86,
+        370394116
+      ]
+    ],
+    "note": "Full daily series still not held \u2014 this is quarterly only. Sufficient for a quarterly trend chart or forecast; not sufficient for day-level analysis."
+  }
+}

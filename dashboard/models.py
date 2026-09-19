@@ -57,7 +57,7 @@ class StoreCountYear(models.Model):
     def __str__(self):
         return f"FY{self.fy}: {self.total} stores"
 
-
+2
 class StockQuarter(models.Model):
     quarter = models.CharField(max_length=20)
     open_price = models.FloatField()
