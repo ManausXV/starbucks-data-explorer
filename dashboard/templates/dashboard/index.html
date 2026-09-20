@@ -1,4 +1,5 @@
 {% extends "dashboard/layout.html" %}
+{% load static %}
 
 {% block body %}
 
@@ -28,39 +29,39 @@
 <div class="container-fluid py-5">
     <div class="row">
         <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-img-top promo-image bg-brand-green d-flex align-items-center justify-content-center p-4">
-                    <p class="text-white font-weight-bold text-center mb-0">A new store opens every ~11 hours</p>
-                </div>
+            <div class="card h-100 promo-card-rounded">
+                <img src="{% static 'dashboard/images/store.jpg' %}" class="card-img-top promo-image" alt="Starbucks store">
                 <div class="card-body">
                     <h5 class="card-title">Store growth, FY2025</h5>
+                    <p class="promo-highlight">A new store opens every ~11 hours</p>
                     <p class="card-text text-muted">40,199 → 40,990 locations across 89 markets — a net 791 new stores in one year.</p>
+                    <a href="#" class="btn-brand-green">See more →</a>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4 mb-4">
-            <a href="#" class="card h-100 text-decoration-none text-dark">
-                <div class="card-img-top promo-image bg-brand-amber d-flex align-items-center justify-content-center p-4">
-                    <p class="text-white font-weight-bold text-center mb-0">Operating margin: 7.9% and falling</p>
-                </div>
+            <div class="card h-100 promo-card-rounded">
+                <img src="{% static 'dashboard/images/financials.jpg' %}" class="card-img-top promo-image" alt="Financial data">
                 <div class="card-body">
                     <h5 class="card-title">The margin story</h5>
+                    <p class="promo-highlight">Operating margin: 7.9% and falling</p>
                     <p class="card-text text-muted">16.3% → 15.0% → 7.9%, FY2023 to FY2025 — even as revenue kept climbing.</p>
+                    <a href="#" class="btn-brand-green">See the breakdown →</a>
                 </div>
-            </a>
+            </div>
         </div>
 
         <div class="col-md-4 mb-4">
-            <a href="#" class="card h-100 text-decoration-none text-dark">
-                <div class="card-img-top promo-image bg-brand-dark d-flex align-items-center justify-content-center p-4">
-                    <p class="text-white font-weight-bold text-center mb-0">242 real drinks, fully searchable</p>
-                </div>
+            <div class="card h-100 promo-card-rounded">
+                <img src="{% static 'dashboard/images/menu.jpg' %}" class="card-img-top promo-image" alt="Starbucks menu items">
                 <div class="card-body">
                     <h5 class="card-title">Menu Explorer</h5>
+                    <p class="promo-highlight">242 real drinks, fully searchable</p>
                     <p class="card-text text-muted">From a 4-calorie Americano to an 84g-sugar Java Chip — filter live, no reload.</p>
+                    <a href="#" class="btn-brand-green">Explore the menu →</a>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>

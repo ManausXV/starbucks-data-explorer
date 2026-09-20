@@ -2,7 +2,7 @@ body {
     font-family: 'DM Sans', sans-serif;
 }
 
-.navbar-brand {
+.navbar-light .navbar-brand {
     color: #00704A;
     font-weight: 800;
     font-family: 'Segoe UI', 'Lato', sans-serif;
@@ -61,6 +61,41 @@ body {
 
 .promo-image {
     height: 150px;
+}
+
+.promo-card-rounded {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #E3E8E5;
+}
+
+.promo-image {
+    height: 180px;
+    object-fit: cover;
+}
+
+.promo-highlight {
+    font-weight: 700;
+    color: #1E3932;
+    margin-bottom: 8px;
+}
+
+.btn-brand-green {
+    display: inline-block;
+    background-color: #00704A;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.btn-brand-green:hover {
+    opacity: 0.85;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 @media (max-width: 576px) {
