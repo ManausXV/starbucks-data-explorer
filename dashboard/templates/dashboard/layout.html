@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Starbucks Data Explorer{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">STARBUCKS DATA EXPLORER</div>
+        <div class="navbar-links">
+            <a href="#">Overview</a>
+            <a href="#">Financials</a>
+            <a href="#">Store Growth</a>
+            <a href="#">Menu Explorer</a>
+            <a href="#">Stock & Loyalty</a>
+            <a href="#">Sources</a>
+        </div>
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
