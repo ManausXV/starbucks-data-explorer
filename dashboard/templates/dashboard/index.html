@@ -112,6 +112,7 @@
             <div class="chart-card">
                 <h6 class="font-weight-bold">Revenue by segment - FY2025</h6>
                 <canvas id="segmentChart"></canvas>
+                {{ segment_data|json_script:"segment-data" }}
             </div>
         </div>
     </div>

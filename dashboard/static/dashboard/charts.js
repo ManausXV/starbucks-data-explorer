@@ -1,12 +1,14 @@
+const segmentData = JSON.parse(document.getElementById('segment-data').textContent);
+
 const segmentCtx = document.getElementById('segmentChart');
 
 new Chart(segmentCtx, {
     type: 'bar',
     data: {
-        labels: ['North America', 'International', 'Channel Dev.'],
+        labels: segmentData.labels,
         datasets: [{
             label: 'Net Revenue ($M)',
-            data: [27373.1, 7819.9, 1871.7],
+            data: segmentData.values,
             backgroundColor: ['#00704A', '#D9822B', '#1E3932']
         }]
     }
