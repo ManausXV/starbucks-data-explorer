@@ -132,6 +132,10 @@ body {
     border-radius: 12px;
     padding: 20px;
 }
+.chart-canvas-wrapper {
+    position: relative;
+    height: 320px;
+}
 
 @media (max-width: 576px) {
     .hero-badge {

@@ -111,9 +111,29 @@
         <div class="col-md-6 mb-4">
             <div class="chart-card">
                 <h6 class="font-weight-bold">Revenue by segment - FY2025</h6>
-                <canvas id="segmentChart"></canvas>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="segmentChart"></canvas>
+                </div>
                 {{ segment_data|json_script:"segment-data" }}
             </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-card">
+                <h6 class="font-weight-bold">FY2025 revenue mix</h6>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="productChart"></canvas>
+                </div>
+                {{ product_data|json_script:"product-data" }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mb-4">
+        <div class="chart-card">
+            <h6 class="font-weight-bold">Comparable sales are turning around</h6>
+            <div class="chart-canvas-wrapper">
+                <canvas id="compSalesChart"></canvas>
+            </div>
+            {{ comp_sales_data|json_script:"comp-sales-data" }}
         </div>
     </div>
 </div>
