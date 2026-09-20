@@ -25,3 +25,28 @@ def index(request):
         "product_data": product_data,
         "comp_sales_data": comp_sales_data
     })
+
+from .models import SegmentPerformance, ProductRevenue, GeographyRevenue
+
+def financials(request):
+    segments = SegmentPerformance.objects.filter(fy=2025).exclude(segment="Corporate & Other")
+    product = ProductRevenue.objects.get(fy=2025)
+    geography = GeographyRevenue.objects.get(fy=2025)
+
+    product_mix_data = {
+        "labels": ["Beverage", "Food", "Other"],
+        "values": [product.beverage_pct, product.food_pct, product.other_pct],
+    }
+
+    geo_mix_data = {
+        "labels": ["United States", "China", "Other Countries"],
+        "values": [geography.usa_pct, geography.china_pct, geography.other_countries_pct],
+    }
+
+    return render(request, "dashboard/financials.html", {
+        "segments": segments,
+        "product": product,
+        "geography": geography,
+        "product_mix_data": product_mix_data,
+        "geo_mix_data": geo_mix_data,
+    })

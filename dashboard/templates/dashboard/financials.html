@@ -1,0 +1,100 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="container-fluid py-5">
+    <h4 class="font-weight-bold">Financial Performance</h4>
+    <p class="text-muted mb-4">Segment-level revenue and operating income, FY2025</p>
+
+    <div class="row">
+        {% for seg in segments %}
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">{{ seg.segment }}</div>
+                <div class="stat-number">${{ seg.net_revenues }}M</div>
+                <div class="stat-change">{{ seg.operating_margin_pct }}% margin</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="chart-card">
+                <h6 class="font-weight-bold">Revenue by product type</h6>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="productMixChart"></canvas>
+                </div>
+            </div>
+            {{ product_mix_data|json_script:"product-mix-data" }}
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-card">
+                <h6 class="font-weight-bold">Revenue by geography</h6>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="geoMixChart"></canvas>
+                </div>
+            </div>
+            {{ geo_mix_data|json_script:"geo-mix-data" }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const productMixData = JSON.parse(document.getElementById('product-mix-data').textContent);
+    const productMixCtx = document.getElementById('productMixChart');
+
+    new Chart(productMixCtx, {
+        type: 'doughnut',
+        data: {
+            labels: productMixData.labels,
+            datasets: [{
+                data: productMixData.values,
+                backgroundColor: ['#00704A', '#D9822B', '#C9CDC9']
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.label + ': ' + context.raw + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const geoMixData = JSON.parse(document.getElementById('geo-mix-data').textContent);
+    const geoMixCtx = document.getElementById('geoMixChart');
+
+    new Chart(geoMixCtx, {
+        type: 'doughnut',
+        data: {
+            labels: geoMixData.labels,
+            datasets: [{
+                data: geoMixData.values,
+                backgroundColor: ['#00704A', '#1E3932', '#C9CDC9']
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.label + ': ' + context.raw + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
