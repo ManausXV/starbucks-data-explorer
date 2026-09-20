@@ -6,10 +6,12 @@
 <div class="row no-gutters">
     <div class="col-md-6 bg-brand-green d-flex flex-column justify-content-center p-5">
         <h1 class="display-4 font-weight-bold text-white">Starbucks,<br>by the numbers.</h1>
-        <p class="text-white mt-3">An interactive look at Starbucks' financial and operational data, built from public filings and datasets.</p>
+        <p class="text-white mt-3">An interactive look at Starbucks' financial and operational data, built from public
+            filings and datasets.</p>
     </div>
     <div class="col-md-6 bg-brand-dark hero-panel d-flex flex-column align-items-center justify-content-center p-5">
-        <div class="rounded-circle bg-white hero-badge d-flex flex-column align-items-center justify-content-center text-center mb-4">
+        <div
+            class="rounded-circle bg-white hero-badge d-flex flex-column align-items-center justify-content-center text-center mb-4">
             <div class="font-weight-bold hero-badge-number">$37.18B</div>
             <div class="hero-badge-label">FY2025 revenue</div>
         </div>
@@ -30,11 +32,13 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card h-100 promo-card-rounded">
-                <img src="{% static 'dashboard/images/store.jpg' %}" class="card-img-top promo-image" alt="Starbucks store">
+                <img src="{% static 'dashboard/images/store.jpg' %}" class="card-img-top promo-image"
+                    alt="Starbucks store">
                 <div class="card-body">
                     <h5 class="card-title">Store growth, FY2025</h5>
                     <p class="promo-highlight">A new store opens every ~11 hours</p>
-                    <p class="card-text text-muted">40,199 → 40,990 locations across 89 markets — a net 791 new stores in one year.</p>
+                    <p class="card-text text-muted">40,199 → 40,990 locations across 89 markets — a net 791 new stores
+                        in one year.</p>
                     <a href="#" class="btn-brand-green">See more →</a>
                 </div>
             </div>
@@ -42,11 +46,13 @@
 
         <div class="col-md-4 mb-4">
             <div class="card h-100 promo-card-rounded">
-                <img src="{% static 'dashboard/images/financials.jpg' %}" class="card-img-top promo-image" alt="Financial data">
+                <img src="{% static 'dashboard/images/financials.jpg' %}" class="card-img-top promo-image"
+                    alt="Financial data">
                 <div class="card-body">
                     <h5 class="card-title">The margin story</h5>
                     <p class="promo-highlight">Operating margin: 7.9% and falling</p>
-                    <p class="card-text text-muted">16.3% → 15.0% → 7.9%, FY2023 to FY2025 — even as revenue kept climbing.</p>
+                    <p class="card-text text-muted">16.3% → 15.0% → 7.9%, FY2023 to FY2025 — even as revenue kept
+                        climbing.</p>
                     <a href="#" class="btn-brand-green">See the breakdown →</a>
                 </div>
             </div>
@@ -54,16 +60,63 @@
 
         <div class="col-md-4 mb-4">
             <div class="card h-100 promo-card-rounded">
-                <img src="{% static 'dashboard/images/menu.jpg' %}" class="card-img-top promo-image" alt="Starbucks menu items">
+                <img src="{% static 'dashboard/images/menu.jpg' %}" class="card-img-top promo-image"
+                    alt="Starbucks menu items">
                 <div class="card-body">
                     <h5 class="card-title">Menu Explorer</h5>
                     <p class="promo-highlight">242 real drinks, fully searchable</p>
-                    <p class="card-text text-muted">From a 4-calorie Americano to an 84g-sugar Java Chip — filter live, no reload.</p>
+                    <p class="card-text text-muted">From a 4-calorie Americano to an 84g-sugar Java Chip — filter live,
+                        no reload.</p>
                     <a href="#" class="btn-brand-green">Explore the menu →</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<div class="container-fluid pb-5">
+    <h4 class="font-weight-bold mb-4">The numbers behind the story</h4>
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">FY25 Revenue</div>
+                <div class="stat-number">$37.18B</div>
+                <div class="stat-change">▲ 2.8% YoY</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Stores</div>
+                <div class="stat-number">40,990</div>
+                <div class="stat-change">▲ 791 net new</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Rewards members (US)</div>
+                <div class="stat-number">35.5M</div>
+                <div class="stat-change">▲ all-time high</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Comp sales, FY26 Q1</div>
+                <div class="stat-number">+4%</div>
+                <div class="stat-change">▲ from -4% a year ago</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-5">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="chart-card">
+                <h6 class="font-weight-bold">Revenue by segment - FY2025</h6>
+                <canvas id="segmentChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dashboard/charts.js' %}"></script>
 {% endblock %}
