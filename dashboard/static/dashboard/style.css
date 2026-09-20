@@ -1,42 +1,75 @@
 body {
-    margin: 0;
     font-family: 'DM Sans', sans-serif;
 }
 
-.navbar {
-    background-color: #00704A;
-    padding: 16px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .navbar-brand {
-    color: #ffffff;
+    color: #00704A;
     font-weight: 800;
-    font-size: 20px;
     font-family: 'Segoe UI', 'Lato', sans-serif;
 }
-.navbar-links a {
-    color: #ffffff;
-    text-decoration: none;
-    margin-left: 28px;
+
+.navbar .nav-link {
+    color: #4B5563;
     font-weight: 500;
 }
-.navbar-links a {
-    color: #ffffff;
-    text-decoration: none;
-    margin-left: 28px;
-    font-weight: 500;
-    transition: opacity 0.2s ease;
+
+.navbar .nav-link:hover {
+    color: #00704A;
 }
 
-.navbar-links a:hover {
-    opacity: 0.65;
+.navbar .nav-link.active {
+    color: #00704A;
+    font-weight: 700;
 }
 
-.navbar-links a.active {
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 6px 14px;
-    border-radius: 999px;
+.bg-brand-green {
+    background-color: #00704A;
+}
+
+.bg-brand-amber {
+    background-color: #D9822B;
+}
+
+.bg-brand-dark {
+    background-color: #1E3932;
+}
+
+.hero-panel {
+    min-height: 380px;
+}
+
+.hero-badge {
+    width: 260px;
+    height: 260px;
+}
+
+.hero-badge-number {
+    font-size: 36px;
+}
+
+.hero-badge-label {
+    font-size: 18px;
+}
+
+.hero-stats {
+    gap: 48px;
+}
+
+.hero-stat-number {
+    font-size: 20px;
+}
+
+.promo-image {
+    height: 150px;
+}
+
+@media (max-width: 576px) {
+    .hero-badge {
+        width: 180px;
+        height: 180px;
+    }
+
+    .hero-badge-number {
+        font-size: 26px;
+    }
 }
