@@ -18,8 +18,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link active" href="{% url 'index' %}">Overview</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'financials' %}">Financials</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Overview</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'financials' %}active{% endif %}" href="{% url 'financials' %}">Financials</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Store Growth</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Menu Explorer</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Stock &amp; Loyalty</a></li>

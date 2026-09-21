@@ -2,60 +2,100 @@
 {% load static %}
 
 {% block body %}
-
 <div class="container-fluid py-5">
     <h4 class="font-weight-bold">Financial Performance</h4>
-    <p class="text-muted mb-4">Segment-level revenue and operating income, FY2025</p>
+    <p class="text-muted mb-4">Revenue, profit and costs from Starbucks' annual filings</p>
 
-    <div class="row">
-        {% for seg in segments %}
-        <div class="col-md-4 mb-4">
-            <div class="stat-card">
-                <div class="stat-label">{{ seg.segment }}</div>
-                <div class="stat-number">${{ seg.net_revenues }}M</div>
-                <div class="stat-change">{{ seg.operating_margin_pct }}% margin</div>
-            </div>
+    <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">Total revenue, FY2015–FY2025 ($B)</h6>
+        <div class="chart-canvas-wrapper">
+            <canvas id="revenueChart"></canvas>
         </div>
-        {% endfor %}
+        {{ revenue_data|json_script:"revenue-data" }}
     </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="chart-card">
-                <h6 class="font-weight-bold">Revenue by product type</h6>
-                <div class="chart-canvas-wrapper">
-                    <canvas id="productMixChart"></canvas>
-                </div>
-            </div>
-            {{ product_mix_data|json_script:"product-mix-data" }}
+    <div class="chart-card mb-5">
+        <h6 class="font-weight-bold">Operating margin by segment, FY2023–FY2025 (%)</h6>
+        <div class="chart-canvas-wrapper">
+            <canvas id="marginChart"></canvas>
         </div>
-        <div class="col-md-6 mb-4">
-            <div class="chart-card">
-                <h6 class="font-weight-bold">Revenue by geography</h6>
-                <div class="chart-canvas-wrapper">
-                    <canvas id="geoMixChart"></canvas>
+        {{ margin_data|json_script:"margin-data" }}
+    </div>
+
+    <div id="segments">
+        <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+            <h5 class="font-weight-bold mb-2">Segment breakdown, FY{{ year }}</h5>
+            <div class="mb-2">
+                {% for y in years %}
+                <a href="?year={{ y }}#segments"
+                    class="btn btn-outline-secondary rounded-pill ml-2 year-pill {% if y == year %}active{% endif %}">
+                    FY{{ y }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            {% for seg in segments %}
+            <div class="col-md-4 mb-4">
+                <div class="stat-card">
+                    <div class="stat-label">{{ seg.segment }}</div>
+                    <div class="stat-number">${{ seg.net_revenues|floatformat:"1g" }}M</div>
+                    <div class="stat-change">${{ seg.operating_income|floatformat:"1g" }}M profit · {{ seg.operating_margin_pct }}% margin</div>
                 </div>
             </div>
-            {{ geo_mix_data|json_script:"geo-mix-data" }}
+            {% endfor %}
+        </div>
+                <div class="chart-card mb-4">
+            <h6 class="font-weight-bold">Where the money goes, FY{{ year }} ($M)</h6>
+            <div class="chart-canvas-wrapper">
+                <canvas id="expenseChart"></canvas>
+            </div>
+            {{ expense_data|json_script:"expense-data" }}
+        </div>
+                <div class="chart-card mb-4">
+            <h6 class="font-weight-bold">Revenue by geography, FY{{ year }}</h6>
+            <div class="chart-canvas-wrapper">
+                <canvas id="geoChart"></canvas>
+            </div>
+            {{ geo_data|json_script:"geo-data" }}
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
 <script>
-    const productMixData = JSON.parse(document.getElementById('product-mix-data').textContent);
-    const productMixCtx = document.getElementById('productMixChart');
+    const revenueData = JSON.parse(document.getElementById('revenue-data').textContent);
 
-    new Chart(productMixCtx, {
-        type: 'doughnut',
+    new Chart(document.getElementById('revenueChart'), {
+        type: 'line',
         data: {
-            labels: productMixData.labels,
+            labels: revenueData.labels,
             datasets: [{
-                data: productMixData.values,
-                backgroundColor: ['#00704A', '#D9822B', '#C9CDC9']
+                data: revenueData.values,
+                borderColor: '#00704A',
+                backgroundColor: '#00704A',
+                tension: 0.3
             }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+        }
+    });
+        const marginData = JSON.parse(document.getElementById('margin-data').textContent);
+    const yearColors = ['#C9CDC9', '#7FA695', '#00704A'];
+
+    new Chart(document.getElementById('marginChart'), {
+        type: 'bar',
+        data: {
+            labels: marginData.labels,
+            datasets: marginData.datasets.map((d, i) => ({
+                label: d.label,
+                data: d.values,
+                backgroundColor: yearColors[i]
+            }))
         },
         options: {
             maintainAspectRatio: false,
@@ -63,29 +103,59 @@
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            return context.label + ': ' + context.raw + '%';
+                            return context.dataset.label + ': ' + context.raw + '%';
                         }
                     }
                 }
             }
         }
     });
+        const expenseData = JSON.parse(document.getElementById('expense-data').textContent);
+    const costColors = ['#1E3932', '#00704A', '#7FA695', '#B7CFC2', '#A33F2B', '#D9822B'];
 
-    const geoMixData = JSON.parse(document.getElementById('geo-mix-data').textContent);
-    const geoMixCtx = document.getElementById('geoMixChart');
+    new Chart(document.getElementById('expenseChart'), {
+        type: 'bar',
+        data: {
+            labels: expenseData.labels,
+            datasets: expenseData.datasets.map((d, i) => ({
+                label: d.label,
+                data: d.values,
+                backgroundColor: costColors[i]
+            }))
+        },
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            scales: {
+                x: { stacked: true },
+                y: { stacked: true }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.dataset.label + ': $' + context.raw.toLocaleString() + 'M';
+                        }
+                    }
+                }
+            }
+        }
+    });
+        const geoData = JSON.parse(document.getElementById('geo-data').textContent);
 
-    new Chart(geoMixCtx, {
+    new Chart(document.getElementById('geoChart'), {
         type: 'doughnut',
         data: {
-            labels: geoMixData.labels,
+            labels: geoData.labels,
             datasets: [{
-                data: geoMixData.values,
+                data: geoData.values,
                 backgroundColor: ['#00704A', '#1E3932', '#C9CDC9']
             }]
         },
         options: {
             maintainAspectRatio: false,
             plugins: {
+                legend: { position: 'right' },
                 tooltip: {
                     callbacks: {
                         label: function (context) {

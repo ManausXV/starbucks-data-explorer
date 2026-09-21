@@ -137,6 +137,12 @@ body {
     height: 320px;
 }
 
+.btn.btn-outline-secondary.year-pill.active {
+    background-color: #00704A;
+    border-color: #00704A;
+    color: #ffffff;
+}
+
 @media (max-width: 576px) {
     .hero-badge {
         width: 180px;

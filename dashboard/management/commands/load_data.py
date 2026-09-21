@@ -71,6 +71,11 @@ class Command(BaseCommand):
                     net_revenues=seg.get('net_revenues'),
                     operating_income=seg.get('operating_income'),
                     operating_margin_pct=seg.get('operating_margin_pct'),
+                    product_costs=seg.get('product_and_distribution_costs'),
+                    store_costs=seg.get('store_operating_expenses'),
+                    depreciation=seg.get('depreciation_amortization'),
+                    admin_costs=seg.get('general_administrative'),
+                    restructuring=seg.get('restructuring_impairments'), 
                 )
         self.stdout.write(f"Loaded {SegmentPerformance.objects.count()} SegmentPerformance rows.")
 

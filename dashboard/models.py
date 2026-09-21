@@ -15,6 +15,11 @@ class SegmentPerformance(models.Model):
     net_revenues = models.FloatField()
     operating_income = models.FloatField(null=True, blank=True)
     operating_margin_pct = models.FloatField(null=True, blank=True)
+    product_costs = models.FloatField(null=True, blank=True)
+    store_costs = models.FloatField(null=True, blank=True)
+    depreciation = models.FloatField(null=True, blank=True)
+    admin_costs = models.FloatField(null=True, blank=True)
+    restructuring = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"FY{self.fy} — {self.segment}"
