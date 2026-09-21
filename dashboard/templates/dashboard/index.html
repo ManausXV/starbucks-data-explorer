@@ -39,7 +39,7 @@
                     <p class="promo-highlight">A new store opens every ~11 hours</p>
                     <p class="card-text text-muted">40,199 → 40,990 locations across 89 markets — a net 791 new stores
                         in one year.</p>
-                    <a href="#" class="btn-brand-green">See more →</a>
+                    <a href="{% if request.resolver_match.url_name == 'stores' %}active{% endif %}" class="btn-brand-green">See more →</a>
                 </div>
             </div>
         </div>

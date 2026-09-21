@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue
+from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation
 
 def index(request):
     segments = SegmentPerformance.objects.filter(fy=2025).exclude(segment="Corporate & Other")
@@ -85,3 +85,31 @@ def financials(request):
         "geo_data": geo_data,
     })
 
+def stores(request):
+    counts = list(StoreCountYear.objects.order_by("fy"))
+    first = counts[0]
+    previous = counts[-2]
+    latest = counts[-1]
+
+    biggest_gain = 0
+    biggest_year = None
+    for i in range(1, len(counts)):
+        gain = counts[i].total - counts[i - 1].total
+        if gain > biggest_gain:
+            biggest_gain = gain
+            biggest_year = counts[i].fy
+
+    count_data = {
+        "labels": [f"FY{c.fy}" for c in counts],
+        "values": [c.total for c in counts],
+    }
+
+    return render(request, "dashboard/stores.html", {
+        "latest": latest,
+        "one_year_gain": latest.total - previous.total,
+        "first": first,
+        "growth": round(latest.total / first.total, 1),
+        "biggest_gain": biggest_gain,
+        "biggest_year": biggest_year,
+        "count_data": count_data,
+    })

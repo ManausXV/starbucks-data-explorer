@@ -1,0 +1,45 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid py-5">
+    <h4 class="font-weight-bold">Store Growth</h4>
+    <p class="text-muted mb-4">How Starbucks' store footprint grew, and where the stores are</p>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Stores, FY{{ latest.fy }}</div>
+                <div class="stat-number">{{ latest.total|floatformat:"0g" }}</div>
+                <div class="stat-change">+{{ one_year_gain|floatformat:"0g" }} in one year</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Growth since FY{{ first.fy }}</div>
+                <div class="stat-number">{{ growth }}×</div>
+                <div class="stat-change">{{ first.total|floatformat:"0g" }} → {{ latest.total|floatformat:"0g" }} stores</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Biggest single year</div>
+                <div class="stat-number">+{{ biggest_gain|floatformat:"0g" }}</div>
+                <div class="stat-change">FY{{ biggest_year }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">Total stores worldwide, FY{{ first.fy }}-FY{{ latest.fy }}</h6>
+        <div class="chart-canvas-wrapper">
+            <canvas id="countChart"></canvas>
+        </div>
+        {{ count_data|json_script:"count-data" }}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dashboard/stores.js' %}"></script>
+{% endblock %}
