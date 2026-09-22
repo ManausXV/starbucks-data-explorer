@@ -18,7 +18,8 @@
             <div class="stat-card">
                 <div class="stat-label">Growth since FY{{ first.fy }}</div>
                 <div class="stat-number">{{ growth }}×</div>
-                <div class="stat-change">{{ first.total|floatformat:"0g" }} → {{ latest.total|floatformat:"0g" }} stores</div>
+                <div class="stat-change">{{ first.total|floatformat:"0g" }} → {{ latest.total|floatformat:"0g" }} stores
+                </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
@@ -36,6 +37,14 @@
             <canvas id="countChart"></canvas>
         </div>
         {{ count_data|json_script:"count-data" }}
+    </div>
+    <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">Top 10 countries by store count</h6>
+        <p class="text-muted mb-3">From the 2017 store directory ({{ total_locations|floatformat:"0g" }} stores)</p>
+        <div class="chart-canvas-wrapper">
+            <canvas id="countryChart"></canvas>
+        </div>
+        {{ country_data|json_script:"country-data" }}
     </div>
 </div>
 {% endblock %}

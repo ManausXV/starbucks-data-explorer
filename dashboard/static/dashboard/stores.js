@@ -15,3 +15,21 @@ new Chart(document.getElementById('countChart'), {
         plugins: { legend: { display: false } }
     }
 });
+
+const countryData = JSON.parse(document.getElementById('country-data').textContent);
+
+new Chart(document.getElementById('countryChart'), {
+    type: 'bar',
+    data: {
+        labels: countryData.labels,
+        datasets: [{
+            data: countryData.values,
+            backgroundColor: '#00704A'
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } }
+    }
+});

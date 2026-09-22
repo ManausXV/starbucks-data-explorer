@@ -1,5 +1,12 @@
 from django.shortcuts import render
 from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation
+from django.db.models import Count
+
+COUNTRY_NAMES = {
+    "US": "United States", "CN": "China", "JP": "Japan", "KR": "South Korea",
+    "CA": "Canada", "GB": "United Kingdom", "MX": "Mexico", "TW": "Taiwan",
+    "TR": "Turkey", "ID": "Indonesia",
+}
 
 def index(request):
     segments = SegmentPerformance.objects.filter(fy=2025).exclude(segment="Corporate & Other")
@@ -104,6 +111,18 @@ def stores(request):
         "values": [c.total for c in counts],
     }
 
+    top_countries = (
+        StoreLocation.objects
+        .values("country_code")
+        .annotate(store_count=Count("id"))
+        .order_by("-store_count")[:10]
+    )
+
+    country_data = {
+        "labels": [COUNTRY_NAMES.get(c["country_code"], c["country_code"]) for c in top_countries],
+        "values": [c["store_count"] for c in top_countries],
+    }
+
     return render(request, "dashboard/stores.html", {
         "latest": latest,
         "one_year_gain": latest.total - previous.total,
@@ -112,4 +131,7 @@ def stores(request):
         "biggest_gain": biggest_gain,
         "biggest_year": biggest_year,
         "count_data": count_data,
+        "country_data": country_data,
+        "total_locations": StoreLocation.objects.count(),
     })
+
