@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation
+from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation, MenuDrink, MenuFood
 from django.db.models import Count
 from django.http import JsonResponse # sending req w/o refreshing
 
@@ -178,3 +178,21 @@ def store_search(request):
     ]
 
     return JsonResponse({"total": total, "stores": stores})
+
+def menu(request):
+    top_caffeine = MenuDrink.objects.filter(caffeine__isnull=False).order_by("-caffeine").first()
+    top_sugar = MenuDrink.objects.filter(sugars__isnull=False).order_by("-sugars").first()
+    top_protein = MenuFood.objects.filter(protein__isnull=False).order_by("-protein").first()
+
+    drinks = list(MenuDrink.objects.values(
+        "beverage", "category", "prep", "calories", "sugars", "caffeine", "protein"
+    ))
+    foods = list(MenuFood.objects.values("name", "calories", "fat", "carbs", "protein"))
+
+    return render(request, "dashboard/menu.html", {
+        "top_caffeine": top_caffeine,
+        "top_sugar": top_sugar,
+        "top_protein": top_protein,
+        "drinks": drinks,
+        "foods": foods,
+    })

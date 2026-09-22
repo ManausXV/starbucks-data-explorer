@@ -1,0 +1,68 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid py-5">
+    <h4 class="font-weight-bold">Menu Explorer</h4>
+    <p class="text-muted mb-4">Nutrition facts for 242 drinks and 113 food items</p>
+
+    <div class="mb-3">
+        <button id="mode-drinks" class="btn btn-outline-secondary rounded-pill mr-2 year-pill active">Drinks</button>
+        <button id="mode-foods" class="btn btn-outline-secondary rounded-pill year-pill">Food</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Most caffeine</div>
+                <div class="stat-number">{{ top_caffeine.caffeine|floatformat:0 }}mg</div>
+                <div class="stat-change">{{ top_caffeine.beverage }} ({{ top_caffeine.prep }})</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Most sugar</div>
+                <div class="stat-number">{{ top_sugar.sugars|floatformat:0 }}g</div>
+                <div class="stat-change">{{ top_sugar.beverage }} ({{ top_sugar.prep }})</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Most protein (food)</div>
+                <div class="stat-number">{{ top_protein.protein|floatformat:0 }}g</div>
+                <div class="stat-change">{{ top_protein.name }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="chart-card mb-4">
+        <div class="row">
+            <div class="col-md-5 mb-3">
+                <label for="menu-search" class="font-weight-bold small">Search</label>
+                <input id="menu-search" type="text" class="form-control" placeholder="Search by name, e.g. latte">
+            </div>
+            <div class="col-md-4 mb-3" id="category-wrapper">
+                <label for="menu-category" class="font-weight-bold small">Category</label>
+                <select id="menu-category" class="form-control">
+                    <option value="">All categories</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="menu-sort" class="font-weight-bold small">Sort by</label>
+                <select id="menu-sort" class="form-control"></select>
+            </div>
+        </div>
+        <p id="menu-count" class="text-muted small"></p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead id="menu-head"></thead>
+                <tbody id="menu-rows"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{ drinks|json_script:"drinks-data" }}
+{{ foods|json_script:"foods-data" }}
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dashboard/menu.js' %}"></script>
+{% endblock %}
