@@ -1,11 +1,26 @@
 from django.shortcuts import render
 from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation
 from django.db.models import Count
+from django.http import JsonResponse # sending req w/o refreshing
 
 COUNTRY_NAMES = {
-    "US": "United States", "CN": "China", "JP": "Japan", "KR": "South Korea",
-    "CA": "Canada", "GB": "United Kingdom", "MX": "Mexico", "TW": "Taiwan",
-    "TR": "Turkey", "ID": "Indonesia",
+    "AE": "United Arab Emirates", "AR": "Argentina", "AT": "Austria", "AW": "Aruba",
+    "BE": "Belgium", "BG": "Bulgaria", "BH": "Bahrain", "BN": "Brunei",
+    "BS": "Bahamas", "CA": "Canada", "CL": "Chile", "CN": "China",
+    "CZ": "Czech Republic", "DE": "Germany", "ES": "Spain", "FR": "France",
+    "GB": "United Kingdom", "GR": "Greece", "GT": "Guatemala", "HK": "Hong Kong",
+    "HU": "Hungary", "ID": "Indonesia", "IE": "Ireland", "JO": "Jordan",
+    "JP": "Japan", "KR": "South Korea", "KW": "Kuwait", "LB": "Lebanon",
+    "MO": "Macau", "MX": "Mexico", "MY": "Malaysia", "NL": "Netherlands",
+    "NZ": "New Zealand", "OM": "Oman", "PE": "Peru", "PH": "Philippines",
+    "PL": "Poland", "PT": "Portugal", "QA": "Qatar", "RO": "Romania",
+    "RU": "Russia", "SA": "Saudi Arabia", "SG": "Singapore", "SK": "Slovakia",
+    "SV": "El Salvador", "TH": "Thailand", "TR": "Turkey", "TW": "Taiwan",
+    "US": "United States",
+}
+OWNERSHIP_NAMES = {
+    "CO": "Company-operated", "LS": "Licensed",
+    "JV": "Joint venture", "FR": "Franchise",
 }
 
 def index(request):
@@ -133,5 +148,33 @@ def stores(request):
         "count_data": count_data,
         "country_data": country_data,
         "total_locations": StoreLocation.objects.count(),
+        "country_options": sorted(COUNTRY_NAMES.items(), key=lambda item: item[1]),
+        "ownership_options": OWNERSHIP_NAMES.items(),
     })
 
+def store_search(request):
+    query = request.GET.get("q", "").strip()
+    country = request.GET.get("country", "")
+    owner = request.GET.get("owner", "")
+
+    results = StoreLocation.objects.all()
+    if query:
+        results = results.filter(city__icontains=query)
+    if country:
+        results = results.filter(country_code=country)
+    if owner:
+        results = results.filter(ownership_type=owner)
+
+    total = results.count()
+    stores = [
+        {
+            "city": s.city,
+            "region": s.subdivision_code,
+            "country": COUNTRY_NAMES.get(s.country_code, s.country_code),
+            "ownership": OWNERSHIP_NAMES.get(s.ownership_type, s.ownership_type),
+            "number": s.store_number,
+        }
+        for s in results.order_by("city")[:50]
+    ]
+
+    return JsonResponse({"total": total, "stores": stores})

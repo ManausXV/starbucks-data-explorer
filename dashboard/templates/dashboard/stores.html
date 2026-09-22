@@ -46,6 +46,55 @@
         </div>
         {{ country_data|json_script:"country-data" }}
     </div>
+    <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">Store directory</h6>
+        <p class="text-muted mb-3">
+            A 2017 snapshot of {{ total_locations|floatformat:"0g" }} stores.
+            Today's total ({{ latest.total|floatformat:"0g" }}) is higher,
+            so newer stores won't appear here.
+        </p>
+        <div class="row">
+            <div class="col-md-5 mb-3">
+                <label for="city-search" class="font-weight-bold small">City</label>
+                <input id="city-search" type="text" class="form-control" placeholder="Search by city, e.g. Seattle">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="country-filter" class="font-weight-bold small">Country</label>
+                <select id="country-filter" class="form-control">
+                    <option value="">All countries</option>
+                    {% for code, name in country_options %}
+                    <option value="{{ code }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="owner-filter" class="font-weight-bold small">Ownership</label>
+                <select id="owner-filter" class="form-control">
+                    <option value="">All types</option>
+                    {% for code, name in ownership_options %}
+                    <option value="{{ code }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <p id="store-count" class="text-muted small"></p>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Region</th>
+                        <th>Country</th>
+                        <th>Ownership</th>
+                        <th>Store #</th>
+                    </tr>
+                </thead>
+                <tbody id="store-rows"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
