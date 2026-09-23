@@ -1,0 +1,76 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid py-5">
+    <h4 class="font-weight-bold">Stock &amp; Loyalty</h4>
+    <p class="text-muted mb-4">Share price by quarter, and the size of the US Rewards program</p>
+
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Latest close</div>
+                <div class="stat-number">${{ latest.close }}</div>
+                <div class="stat-change">{{ latest.quarter }}</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Highest close</div>
+                <div class="stat-number">${{ highest.close }}</div>
+                <div class="stat-change">{{ highest.quarter }}</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Best quarter</div>
+                <div class="stat-number">+{{ best.change_pct }}%</div>
+                <div class="stat-change">{{ best.quarter }}</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-label">Worst quarter</div>
+                <div class="stat-number">{{ worst.change_pct }}%</div>
+                <div class="stat-change">{{ worst.quarter }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">Closing share price by quarter</h6>
+        <p class="text-muted mb-3">Quarterly closes only, not daily prices</p>
+        <div class="chart-canvas-wrapper">
+            <canvas id="priceChart"></canvas>
+        </div>
+        {{ price_data|json_script:"price-data" }}
+    </div>
+    <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">Quarterly change (%)</h6>
+        <p class="text-muted mb-3">Green quarters gained, red quarters lost</p>
+        <div class="chart-canvas-wrapper">
+            <canvas id="changeChart"></canvas>
+        </div>
+        {{ change_data|json_script:"change-data" }}
+    </div>
+        <div class="chart-card mb-4">
+        <h6 class="font-weight-bold">US Rewards members (millions)</h6>
+        <p class="text-muted mb-3">
+            90-day active members, United States only.
+            These readings are not evenly spaced in time, so they are shown as
+            separate bars rather than a trend line.
+        </p>
+        <div class="chart-canvas-wrapper">
+            <canvas id="loyaltyChart"></canvas>
+        </div>
+        {{ loyalty_data|json_script:"loyalty-data" }}
+        <p class="text-muted mt-3 mb-0">
+            The grey bar is dated only as "about 2022" in the source, so it is shown
+            but never used to calculate growth.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'dashboard/stock.js' %}"></script>
+{% endblock %}

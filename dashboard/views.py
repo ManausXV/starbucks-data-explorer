@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation, MenuDrink, MenuFood
+from .models import FinancialYear, SegmentPerformance, ProductRevenue, GeographyRevenue, StoreCountYear, StoreLocation, MenuDrink, MenuFood, StockQuarter, LoyaltyQuarter
 from django.db.models import Count
 from django.http import JsonResponse # sending req w/o refreshing
 
@@ -195,4 +195,36 @@ def menu(request):
         "top_protein": top_protein,
         "drinks": drinks,
         "foods": foods,
+    })
+
+def stock(request):
+    latest = StockQuarter.objects.order_by("-id").first()
+    highest = StockQuarter.objects.order_by("-close").first()
+    best = StockQuarter.objects.order_by("-change_pct").first()
+    worst = StockQuarter.objects.order_by("change_pct").first()
+
+    quarters = list(StockQuarter.objects.order_by("id"))
+    price_data = {
+        "labels": [q.quarter for q in quarters],
+        "values": [q.close for q in quarters],
+    }
+
+    change_data = {
+        "labels": [q.quarter for q in quarters],
+        "values": [q.change_pct for q in quarters],
+    }
+    loyalty = list(LoyaltyQuarter.objects.order_by("id"))
+    loyalty_data = {
+        "labels": [l.period for l in loyalty],
+        "values": [l.members_millions for l in loyalty],
+    }
+
+    return render(request, "dashboard/stock.html", {
+        "latest": latest,
+        "highest": highest,
+        "best": best,
+        "worst": worst,
+        "price_data": price_data,
+        "change_data": change_data,
+        "loyalty_data": loyalty_data,
     })
