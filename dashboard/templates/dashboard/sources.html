@@ -1,0 +1,80 @@
+{% extends "dashboard/layout.html" %}
+
+{% block body %}
+<div class="container-fluid py-5">
+    <h4 class="font-weight-bold">Sources</h4>
+    <p class="text-muted mb-4">
+        Every number on this site, where it came from, and what it cannot tell you.
+        Nothing here is estimated or filled in.
+    </p>
+
+    <div class="chart-card mb-4">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Source</th>
+                        <th>Confidence</th>
+                        <th>Coverage</th>
+                        <th>What to watch for</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in source_rows %}
+                    <tr>
+                        <td class="font-weight-bold">{{ row.data }}</td>
+                        <td class="text-muted">{{ row.source }}</td>
+                        <td class="font-weight-bold" style="color: {{ row.color }}">{{ row.tag }}</td>
+                        <td class="text-muted">{{ row.coverage }}</td>
+                        <td class="text-muted">{{ row.caveat }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="chart-card mb-4">
+        <h5 class="font-weight-bold mb-3">Three things worth knowing</h5>
+
+        <h6 class="font-weight-bold">The store directory is older than the store count</h6>
+        <p class="text-muted">
+            The searchable directory holds 28,289 stores from a 2017 dataset, while the
+            FY2025 filing reports 40,990 stores. Both numbers are correct for their own
+            date, and the directory simply predates roughly 12,700 newer stores. The site
+            shows both rather than quietly picking one.
+        </p>
+
+        <h6 class="font-weight-bold mt-4">The cost bars do not add up to exactly 100%</h6>
+        <p class="text-muted">
+            The Financials cost breakdown shows the five expense lines reported for each
+            segment, plus operating income. A few smaller items, including other operating
+            expenses and income from partner businesses, sit outside those lines, so each
+            bar comes close to the segment's full revenue without matching it exactly.
+        </p>
+
+        <h6 class="font-weight-bold mt-4">Rewards numbers are US-only and unevenly spaced</h6>
+        <p class="text-muted mb-0">
+            Members are counted as 90 day active users in the United States, so this is not
+            a worldwide total. One reading is dated only as "about 2022" in the source. It is
+            kept, shown in grey, and never used to calculate a growth rate.
+        </p>
+    </div>
+
+    <div class="chart-card">
+        <h5 class="font-weight-bold mb-3">How this site was built</h5>
+        <p class="text-muted">
+            One JSON file and three CSV files are loaded into ten database tables by a single
+            command, which can be re-run at any time to rebuild the data from scratch. Every
+            page queries those tables directly, so no figure on this site is typed into a
+            template by hand.
+        </p>
+        <p class="text-muted mb-0">
+            Filtering happens in two different places, on purpose. The store directory searches
+            28,289 rows on the server and returns fifty matches at a time, because sending every
+            row to the browser would be wasteful. The menu holds only 355 items, so the whole
+            menu is sent once and filtered instantly in the browser with no further requests.
+        </p>
+    </div>
+</div>
+{% endblock %}

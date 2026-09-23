@@ -23,7 +23,7 @@
                 <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'stores' %}active{% endif %}" href="{% url 'stores' %}">Store Growth</a></li>
                 <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'menu' %}active{% endif %}" href="{% url 'menu' %}">Menu Explorer</a></li>
                 <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'stock' %}active{% endif %}" href="{% url 'stock' %}">Stock &amp; Loyalty</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sources</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'sources' %}active{% endif %}" href="{% url 'sources' %}">Sources</a></li>
             </ul>
         </div>
     </nav>

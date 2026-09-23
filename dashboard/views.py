@@ -22,6 +22,36 @@ OWNERSHIP_NAMES = {
     "CO": "Company-operated", "LS": "Licensed",
     "JV": "Joint venture", "FR": "Franchise",
 }
+FILING = "#00704A"
+REPORTED = "#B57A22"
+DATASET = "#4B5563"
+
+SOURCE_ROWS = [
+    {"data": "Total revenue", "source": "FY2025 10-K and earlier filings", "tag": "Filing", "color": FILING,
+     "coverage": "FY2015–FY2025", "caveat": "None. Straight from the income statement."},
+    {"data": "Segment revenue and profit", "source": "FY2025 10-K", "tag": "Filing", "color": FILING,
+     "coverage": "FY2023–FY2025", "caveat": "Corporate & Other is left out of the charts; it is overhead, not a trading segment."},
+    {"data": "Segment cost lines", "source": "FY2025 10-K", "tag": "Filing", "color": FILING,
+     "coverage": "FY2023–FY2025", "caveat": "Five expense lines only. Smaller items sit outside them, so the bars do not total exactly 100%."},
+    {"data": "Revenue by product type", "source": "FY2025 10-K", "tag": "Filing", "color": FILING,
+     "coverage": "FY2023–FY2025", "caveat": "Beverage, food and other only. No finer breakdown is published."},
+    {"data": "Revenue by geography", "source": "FY2025 10-K", "tag": "Filing", "color": FILING,
+     "coverage": "FY2023–FY2025", "caveat": "The United States and China are named; every other market is grouped together."},
+    {"data": "Store counts", "source": "FY2025 10-K and earlier filings", "tag": "Filing", "color": FILING,
+     "coverage": "FY2012–FY2025", "caveat": "The company-operated and licensed split is only published for three of those years."},
+    {"data": "Comparable store sales", "source": "Quarterly results releases", "tag": "Reported", "color": REPORTED,
+     "coverage": "Selected quarters", "caveat": "Some quarters are global, others North America or China only, so they are not one continuous series."},
+    {"data": "Rewards members", "source": "Quarterly results and press coverage", "tag": "Reported", "color": REPORTED,
+     "coverage": "9 readings, FY2020–FY2026", "caveat": "United States only, 90-day active. One reading is dated only as \"about 2022\"."},
+    {"data": "Share price", "source": "stockanalysis.com quarterly history", "tag": "Dataset", "color": DATASET,
+     "coverage": "Q4 2016 – Q3 2026", "caveat": "Quarterly closes only. Not detailed enough for day-level analysis."},
+    {"data": "Drink nutrition", "source": "Public Kaggle dataset", "tag": "Dataset", "color": DATASET,
+     "coverage": "242 drinks", "caveat": "A 2017 snapshot. Caffeine reads \"Varies\" on some teas and is shown as a dash."},
+    {"data": "Food nutrition", "source": "Public Kaggle dataset", "tag": "Dataset", "color": DATASET,
+     "coverage": "113 items", "caveat": "A 2017 snapshot with no categories, so the category filter is hidden for food."},
+    {"data": "Store locations", "source": "Public Kaggle dataset", "tag": "Dataset", "color": DATASET,
+     "coverage": "28,289 stores, 49 countries", "caveat": "A 2017 snapshot. Newer stores are missing; see the note below the table."},
+]
 
 def index(request):
     segments = SegmentPerformance.objects.filter(fy=2025).exclude(segment="Corporate & Other")
@@ -227,4 +257,9 @@ def stock(request):
         "price_data": price_data,
         "change_data": change_data,
         "loyalty_data": loyalty_data,
+    })
+
+def sources(request):
+    return render(request, "dashboard/sources.html", {
+        "source_rows": SOURCE_ROWS,
     })
