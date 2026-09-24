@@ -6,8 +6,7 @@
 <div class="row no-gutters">
     <div class="col-md-6 bg-brand-green d-flex flex-column justify-content-center p-5">
         <h1 class="display-4 font-weight-bold text-white">Starbucks,<br>by the numbers.</h1>
-        <p class="text-white mt-3">An interactive look at Starbucks' financial and operational data, built from public
-            filings and datasets.</p>
+        <p class="hero-subline">An interactive look at Starbucks' financial and operational data, built from public filings and datasets.</p>
     </div>
     <div class="col-md-6 bg-brand-dark hero-panel d-flex flex-column align-items-center justify-content-center p-5">
         <div
@@ -36,10 +35,9 @@
                     alt="Starbucks store">
                 <div class="card-body">
                     <h5 class="card-title">Store growth, FY2025</h5>
-                    <p class="promo-highlight">A new store opens every ~11 hours</p>
-                    <p class="card-text text-muted">40,199 → 40,990 locations across 89 markets — a net 791 new stores
-                        in one year.</p>
-                    <a href="{% if request.resolver_match.url_name == 'stores' %}active{% endif %}" class="btn-brand-green">See more →</a>
+                    <p class="promo-highlight">A new store opens every 11 hours</p>
+                    <p class="card-text text-muted">Starbucks added a net 791 stores in FY2025, reaching 40,990 locations across 89 markets.</p>
+                    <a href="{% url 'stores' %}" class="btn-brand-green">See more</a>
                 </div>
             </div>
         </div>
@@ -51,9 +49,8 @@
                 <div class="card-body">
                     <h5 class="card-title">The margin story</h5>
                     <p class="promo-highlight">Operating margin: 7.9% and falling</p>
-                    <p class="card-text text-muted">16.3% → 15.0% → 7.9%, FY2023 to FY2025 — even as revenue kept
-                        climbing.</p>
-                    <a href="{% url 'financials' %}" class="btn-brand-green">See the breakdown →</a>
+                    <p class="card-text text-muted">Margin fell from 16.3% in FY2023 to 15.0%, then to 7.9%, even as revenue kept climbing.</p>
+                    <a href="{% url 'financials' %}" class="btn-brand-green">See the breakdown</a>
                 </div>
             </div>
         </div>
@@ -65,9 +62,8 @@
                 <div class="card-body">
                     <h5 class="card-title">Menu Explorer</h5>
                     <p class="promo-highlight">242 real drinks, fully searchable</p>
-                    <p class="card-text text-muted">From a 4-calorie Americano to an 84g-sugar Java Chip — filter live,
-                        no reload.</p>
-                    <a href="#" class="btn-brand-green">Explore the menu →</a>
+                    <p class="card-text text-muted">Compare everything from a 4 calorie Americano to an 84g sugar Java Chip. Filter live, with no page reload.</p>
+                    <a href="{% url 'menu' %}" class="btn-brand-green">Explore the menu</a>
                 </div>
             </div>
         </div>

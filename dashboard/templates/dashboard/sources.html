@@ -4,8 +4,8 @@
 <div class="container-fluid py-5">
     <h4 class="font-weight-bold">Sources</h4>
     <p class="text-muted mb-4">
-        Every number on this site, where it came from, and what it cannot tell you.
-        Nothing here is estimated or filled in.
+        Where every number on this site came from, and what it can't tell you.
+        I haven't estimated or filled in anything. Where the data is thin, it says so.
     </p>
 
     <div class="chart-card mb-4">
@@ -33,47 +33,47 @@
                 </tbody>
             </table>
         </div>
-    </div>
-        <div class="chart-card mb-4">
+    <div class="chart-card mb-4">
         <h5 class="font-weight-bold mb-3">Three things worth knowing</h5>
 
         <h6 class="font-weight-bold">The store directory is older than the store count</h6>
         <p class="text-muted">
-            The searchable directory holds 28,289 stores from a 2017 dataset, while the
-            FY2025 filing reports 40,990 stores. Both numbers are correct for their own
-            date, and the directory simply predates roughly 12,700 newer stores. The site
-            shows both rather than quietly picking one.
+            The searchable directory has 28,289 stores in it, from a dataset put together in 2017.
+            The FY2025 annual report says there are 40,990 stores. Both are right for their own
+            moment in time. The directory just predates about 12,700 newer shops. I'd rather show
+            both numbers and explain the gap than quietly pick whichever one looks better.
         </p>
 
-        <h6 class="font-weight-bold mt-4">The cost bars do not add up to exactly 100%</h6>
+        <h6 class="font-weight-bold mt-4">The cost bars don't quite add up</h6>
         <p class="text-muted">
-            The Financials cost breakdown shows the five expense lines reported for each
-            segment, plus operating income. A few smaller items, including other operating
-            expenses and income from partner businesses, sit outside those lines, so each
-            bar comes close to the segment's full revenue without matching it exactly.
+            On the Financials page, each bar breaks a segment's revenue into the five cost lines
+            Starbucks actually reports, plus whatever profit is left. A few smaller things sit
+            outside those five, like other operating costs and income from partner businesses.
+            So the bars land close to full revenue without matching it exactly.
         </p>
 
-        <h6 class="font-weight-bold mt-4">Rewards numbers are US-only and unevenly spaced</h6>
+        <h6 class="font-weight-bold mt-4">The Rewards numbers are patchy</h6>
         <p class="text-muted mb-0">
-            Members are counted as 90 day active users in the United States, so this is not
-            a worldwide total. One reading is dated only as "about 2022" in the source. It is
-            kept, shown in grey, and never used to calculate a growth rate.
+            They count people in the US who used Rewards in the last 90 days, so this isn't a
+            worldwide membership total. The readings also aren't evenly spaced, which is why
+            they're bars rather than a line. One of them is dated only as "about 2022" in the
+            source. I kept it, coloured it grey, and never use it to work out growth.
         </p>
     </div>
 
     <div class="chart-card">
         <h5 class="font-weight-bold mb-3">How this site was built</h5>
         <p class="text-muted">
-            One JSON file and three CSV files are loaded into ten database tables by a single
-            command, which can be re-run at any time to rebuild the data from scratch. Every
-            page queries those tables directly, so no figure on this site is typed into a
-            template by hand.
+            One JSON file and three CSVs get loaded into ten database tables by a single command,
+            which I can run again at any point to rebuild everything from the original files.
+            Every page reads from those tables, so nothing you see here is a number I typed into
+            a page by hand.
         </p>
         <p class="text-muted mb-0">
-            Filtering happens in two different places, on purpose. The store directory searches
-            28,289 rows on the server and returns fifty matches at a time, because sending every
-            row to the browser would be wasteful. The menu holds only 355 items, so the whole
-            menu is sent once and filtered instantly in the browser with no further requests.
+            Searching works differently in two places, deliberately. The store directory has 28,289
+            rows, which is far too many to hand to a browser, so the server does the searching and
+            sends back fifty matches at a time. The menu is only 355 items, so the whole thing goes
+            to the browser once and filtering happens instantly, without asking the server again.
         </p>
     </div>
 </div>
