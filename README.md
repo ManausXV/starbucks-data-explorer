@@ -134,7 +134,7 @@ problem than any individual technical feature in the project.
   nutrition, food nutrition and store locations.
 
 ## Running the application
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 python manage.py migrate
 python manage.py load_data
 python manage.py runserver
