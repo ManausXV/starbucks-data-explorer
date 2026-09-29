@@ -2,14 +2,9 @@
 # Starbucks Data Explorer
 A Django web app that turns eleven years of Starbucks' public financial, operational and menu data into six interactive pages. Originally built as my CS50 Web capstone project.
 
-<img width="1269" height="638" alt="Screenshot 2026-09-29 133555" src="https://github.com/user-attachments/assets/39cb5b56-4394-496c-92ed-3d5450446566" />
-<img width="1268" height="672" alt="Screenshot 2026-09-29 133703" src="https://github.com/user-attachments/assets/0e0309d7-4483-4534-8936-5e75e3d61efa" />
-<img width="1267" height="671" alt="Screenshot 2026-09-29 133646" src="https://github.com/user-attachments/assets/a0b942d7-4aa8-4922-98cc-b69dc4c0d77b" />
-
-
-## Live demo
-
-[Link will be added here soon]
+<img width="1269" height="638" alt="Overview section" src="https://github.com/user-attachments/assets/39cb5b56-4394-496c-92ed-3d5450446566" />
+<img width="1268" height="672" alt="Store growth page" src="https://github.com/user-attachments/assets/0e0309d7-4483-4534-8936-5e75e3d61efa" />
+<img width="1267" height="671" alt="Menu explorer page" src="https://github.com/user-attachments/assets/a0b942d7-4aa8-4922-98cc-b69dc4c0d77b" />
 
 ## Features
 
@@ -34,17 +29,21 @@ The store directory (28k+ rows) is filtered server-side: the browser sends a sea
 ## Data
 
 Loaded from one JSON file (annual report data) and three CSVs (menu nutrition and store locations, both public Kaggle datasets) into ten Django models, via a single management command:
+```
 python manage.py load_data
+```
 
 It rebuilds every table from scratch, so it's safe to re-run at any time.
 
 ## Running it locally
+```
 git clone [repo url]
 cd starbucks-data-explorer
 python -m pip install -r requirements.txt
 python manage.py migrate
 python manage.py load_data
 python manage.py runserver
+```
 
 
 Then open http://127.0.0.1:8000/.
